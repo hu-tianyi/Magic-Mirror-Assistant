@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.html import HttpResponse
-from models import Devices, Tips
+from django.http import HttpResponse
+from display.models import Devices, Tips
 import json
 
 # Create your views here.
