@@ -6,7 +6,7 @@ import json
 # Create your views here.
 
 def index(request):
-    return render(request,'index.html')
+    return render(request, 'index.html')
 
 def devices(request):
     devices_list = Devices.objects.all().order_by('location')
