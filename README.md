@@ -5,7 +5,7 @@
 
 ## Configuration
 
-+ Python 3.5.2
++ Python 3.5.2 + HTML5  + CSS + JAVASCRIPT
 + Django 1.11.11
 + RaspberryPi 3B
 
@@ -21,11 +21,12 @@
 ## Doing
 - [x] 构思数据库结构
 - [x] 构思交互界面布局
-- [x] 搭建前端
+- [x] 搭建前端天气模块
 
 ## Done
 - [x] 构思数据库结构	20th, Mar
-- [x] 搭建后台		21th, Mar
+- [x]  搭建后台		21th, Mar
+- [x]  搭建前端时间模块 	21th, Mar 
 
 加油!
 
