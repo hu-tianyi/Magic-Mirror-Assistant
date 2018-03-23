@@ -14,22 +14,14 @@ class Tips(models.Model):
     def __str__(self):
         return self.tip
 
-
-'''
-class Weathers_predict(models.Model):
-    city = 
-    datetime = 
-    tempreture = 
-    humidity = 
-
-class Weathers_now(models.Model):
-    city = 
-    datetime = 
-    tempreture = 
-    humidity = 
+class Weathers(models.Model):
+    city = models.CharField(default = '城市名<10字', max_length = 10, null = False)
+    date = models.DateField(null = False)
+    condition = models.CharField(default = '天气状况<10字', max_length = 10, null = False)
+    tempreture_low = models.IntegerField(default = 0, null = False)
+    tempreture_high = models.IntegerField(default = 100, null = False)
 
 class News(models.Model):
-    date = models.date()
+    date = models.DateField(null = False)
     title = models.CharField(max_length = 40, null = False)
     content = models.CharField(max_length = 200, null = False)
-'''

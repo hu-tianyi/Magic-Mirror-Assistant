@@ -310,17 +310,17 @@
 
     <script type="text/javascript">
         function getWeather(){
-            $.ajax({
-                method: 'GET',
-                url: 'https://www.sojson.com/open/api/weather/json.shtml?city='+'广州', //天气api 抓广州
-                dataType:'json',
-                success:function(data){
-                    alert("api success");
-                },
-                error:function(er){
-                    alert("api error");
-                }
-            });
+          $.ajax({
+              method: 'GET',
+              url: 'https://www.sojson.com/open/api/weather/json.shtml?city='+'广州', //天气api 抓广州
+              dataType:'json',
+              success:function(data){
+                  alert("api success");
+              },
+              error:function(er){
+                  alert("api error");
+              };
+          });
         }
     </script>
 
@@ -330,9 +330,13 @@
         <div  onload="getTime()" id="mytime"></div>
     </div>
     <div class="top right">
-        <div class="windsun small dimmed"></div>
-        <div class="temp"></div>
-        <div class="forecast small dimmed"></div>
+        <script>
+          $.getJSON('https://www.sojson.com/open/api/weather/json.shtml?city=+广州',function(ret){
+            $.each(ret, function(i,item){
+
+            })
+          })
+        </script>
     </div>
 </body>
 </html>
