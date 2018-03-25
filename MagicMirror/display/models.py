@@ -1,5 +1,6 @@
 #coding=utf-8
 from django.db import models
+import json
 
 # Create your models here.
 
@@ -20,6 +21,10 @@ class Weathers(models.Model):
     condition = models.CharField(default = '天气状况<10字', max_length = 10, null = False)
     tempreture_low = models.IntegerField(default = 0, null = False)
     tempreture_high = models.IntegerField(default = 100, null = False)
+
+    def toJSON(self):
+        import json    
+        return json.dumps(dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]]))
 
 class News(models.Model):
     date = models.DateField(null = False)

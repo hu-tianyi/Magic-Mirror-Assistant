@@ -51,6 +51,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'MagicMirror.urls'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True 
+CORS_ORIGIN_WHITELIST = ( 
+        '0.0.0.0:8000',
+        '10.42.0.1:8000',
+)
 
 TEMPLATES = [
     {
