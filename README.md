@@ -5,7 +5,7 @@
 
 ## Configuration
 
-+ Python 3.5.2 + HTML5  + CSS + JAVASCRIPT
++ Python 3.5.2 + html + jquery
 + Django 1.11.11
 + RaspberryPi 3B
 
