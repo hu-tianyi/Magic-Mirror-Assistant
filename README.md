@@ -22,11 +22,11 @@
 
 ## Done
 - [x] 构思数据库结构	20th, Mar
-	 [x] 搭建后台	21th, Mar
-	 [x] 搭建前端时间模块	21th, Mar
-	 [ ] 天气api接口调用	23th, Mar
-	 [x] 搭建前端天气模块	24th, Mar
-	 [x] 交互界面大致布局	25th, Mar
+- [x] 搭建后台	21th, Mar
+- [x] 搭建前端时间模块	21th, Mar
+- [x] 天气api接口调用	23th, Mar
+- [x] 搭建前端天气模块	24th, Mar
+- [x] 交互界面大致布局	25th, Mar
 
 加油!
 
