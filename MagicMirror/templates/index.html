@@ -18,7 +18,7 @@
       /*font-family: "MFYueHeiNoncommercial-Light", sans-serif;*/
       letter-spacing: -2px;
       color: #fff;
-      font-size: 75px;
+      font-size: 45px;
       -webkit-font-smoothing: antialiased;
       text-rendering: geometricprecision;
     }
@@ -306,7 +306,7 @@
         month=nowtime.getMonth()+1;
         date=nowtime.getDate();
         document.getElementById("mytime").style.color="White";
-        document.getElementById("mytime").style.fontSize="60px";
+        document.getElementById("mytime").style.fontSize="45px";
         document.getElementById("mytime").innerText="  "+year+" - "+month+" - "+date+"\n"+nowtime.toLocaleTimeString();
       }    
       setInterval("showTime()",1000);
@@ -331,11 +331,11 @@
             }
             if (weather_json["data"]["list"][i]["tq1"]=="阴"){
               d.innerHTML = d.innerHTML + (weather_date+" "+"阴天"+" "+weather_json["data"]["list"][i]["qw2"]+"℃ ~"+weather_json["data"]["list"][i]["qw1"]+"℃<br/>");
-              d.style.fontSize = "55px"
+              d.style.fontSize = "45px"
             }
             else{
               d.innerHTML = d.innerHTML + (weather_date+" "+weather_json["data"]["list"][i]["tq1"]+" "+weather_json["data"]["list"][i]["qw2"]+"℃ ~"+weather_json["data"]["list"][i]["qw1"]+"℃<br/>");
-              d.style.fontSize = "55px"
+              d.style.fontSize = "45px"
             //}
             }
           }
