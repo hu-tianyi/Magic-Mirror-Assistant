@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from display.models import Devices, Tips, Weathers, News

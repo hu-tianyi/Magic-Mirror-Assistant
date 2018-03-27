@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.contrib import admin
 from display.models import Devices, Tips, Weathers, News
 

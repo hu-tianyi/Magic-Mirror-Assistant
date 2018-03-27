@@ -1,11 +1,11 @@
 # Magic Mirror Interface
 
 物联网比赛项目-树莓派-软件交互部分
-第一阶段DDL : 2018, 04, 06（实现基本功能）
+第一阶段DDL : 2018-04-06（实现基本功能）
 
 ## Configuration
 
-+ Python 3.5.2 + html + jquery
++ Python 3.5.2 + html + jquery + javascript
 + Django 1.11.11
 + RaspberryPi 3B
 
@@ -22,11 +22,11 @@
 
 ## Done
 - [x] 构思数据库结构	20th, Mar
-- [x] 搭建后台	21th, Mar
-- [x] 搭建前端时间模块	21th, Mar
-- [x] 天气api接口调用	23th, Mar
-- [x] 搭建前端天气模块	24th, Mar
-- [x] 交互界面大致布局	25th, Mar
+	 [x] 搭建后台	21th, Mar
+	 [x] 搭建前端时间模块	21th, Mar
+	 [x] 天气api接口调用	23th, Mar
+	 [x] 搭建前端天气模块	24th, Mar
+	 [x] 交互界面大致布局	25th, Mar
 
 加油!
 
