@@ -1,13 +1,13 @@
-# coding:utf-8
+# -*- coding:utf-8 -*-
+import serial
 
-import serial.tools.list_ports
+ser = serial.Serial("/dev/ttyAMA0",115200)
 
-plist = list(serial.tools.list_ports.comports())
-
-if len(plist) <= 0:
-    print("没有发现端口!")
-else:
-    plist_0 = list(plist[0])
-    serialName = plist_0[0]
-    serialFd = serial.Serial(serialName, 9600, timeout=60)
-    print("可用端口名>>>", serialFd.name)
+print('serial test start ...')
+ser.write("Hello Wrold !!!\n")
+try:
+    while True:
+        ser.write(ser.read())
+except KeyboardInterrupt:
+    if ser != None:
+        ser.close()

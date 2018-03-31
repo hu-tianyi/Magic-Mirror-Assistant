@@ -11,9 +11,9 @@ RaspberryPi 3B
 sudo pip3 install django==1.11.11
 sudo pip3 install websocket-client
 sudo pip3 install dwebsocket
+sudo apt-get install python3-serial
+sudo apt-get install python3-yaml
 ```
-
-
 
 
 ## Todo
