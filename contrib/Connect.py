@@ -11,6 +11,7 @@ WORDS = ["chazuo"]
 SLUG = "chazuo"
 
 def handle(text, mic, profile, wxbot=None):
+    logger = logging.getLogger(__name__)
     try:
         if any(word in text for word in [u"开启", u"打开"]):
             if any(word in text for word in [u"一号", u"1号"])：
