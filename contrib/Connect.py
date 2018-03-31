@@ -2,6 +2,7 @@
 import sys
 import os
 import logging
+#import 串口通信模块
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -10,29 +11,37 @@ WORDS = ["chazuo"]
 SLUG = "chazuo"
 
 def handle(text, mic, profile, wxbot=None):
-    logger = logging.getLogger(__name__)
-    if SLUG not in profile or \
-       'appId' not in profile[SLUG] or\
-       'appSecret' not in profile[SLUG]:
-        mic.say('插座配置有误，插件使用失败', cache=True)
-        return
-    appId = profile[SLUG]['appId']
-    appSecret = profile[SLUG]['appSecret']
-    sentence = getSentence(text)
-    logger.info('sentence: ' + sentence)
-    if sentence:
-        try:
-            s = translate(appId, appSecret, sentence)
-            if s:
-                mic.say(sentence+"的翻译是" + s, cache=False)
-            else:
-                mic.say("翻译" + sentence +"失败，请稍后再试", cache=False)
-        except Exception, e:
-            logger.error(e)
-            mic.say('抱歉, 我不知道怎么翻译' + sentence, cache=False)
-    else:
-        mic.say(u"没有听清楚 请重试", cache=True)
+    try:
+        if any(word in text for word in [u"开启", u"打开"]):
+            if any(word in text for word in [u"一号", u"1号"])：
+                #发送一号打开命令
+                print('发送一号打开命令')
+                mic.say('正在开启一号插座', cache=True)
+            if any(word in text for word in [u"二号", u"2号"])：
+                #发送二号打开命令
+                print('发送二号打开命令')
+                mic.say('正在开启二号插座', cache=True)
+            if any(word in text for word in [u"三号", u"3号"])：
+                #发送三号打开命令
+                print('发送三号打开命令')
+                mic.say('正在开启三号插座', cache=True)
+        elif any(word in text for word in [u"关闭", u"关机"]):
+            if any(word in text for word in [u"一号", u"1号"])：
+                #发送一号关闭命令
+                print('发送一号关闭命令')
+                mic.say('正在关闭一号插座', cache=True)
+            if any(word in text for word in [u"二号", u"2号"])：
+                #发送二号关闭命令
+                print('发送二号关闭命令')
+                mic.say('正在关闭二号插座', cache=True)
+            if any(word in text for word in [u"三号", u"3号"])：
+                #发送三号关闭命令
+                print('发送三号关闭命令')
+                mic.say('正在关闭三号插座', cache=True)
+    except Exception, e:
+        logger.error(e)
+        mic.say('抱歉，物联网控制插件出错', cache=True)
 
                                                             
 def isValid(text):
-    return u"插座" in text
+    return any(word in text for word in [u"插座", u"物联网", u"排插"])
