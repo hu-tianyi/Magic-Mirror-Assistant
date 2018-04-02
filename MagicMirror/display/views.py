@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from display.models import Devices, Tips, Weathers, News
 from django.core import serializers
+from dwebsocket import require_websocket
 import json, urllib.request
 
 # Create your views here.
@@ -59,6 +60,53 @@ def get_weather(request):
                     return 1
                 else:
                     return render(weather_json, content_type = "application/json")
+
+def sockets(request):   #将排插数据写入数据库
+    sockets_message = request.websocket.wait()  #获取客户端发来的指令
+    if sockets_message=='设备一':  #对客户端指令进行分类
+        try:
+            Devices.objects.filter(location=1).delete()
+        except:
+            print('删除数据库-设备对象-旧数据 失败')
+        else:
+            print('删除数据库-设备对象-旧数据 成功')
+        finally:
+            try:
+                if sockets_message=='关':
+                    data = Devices(location=1, status=0, name='设备一')
+                    data.save()
+                if sockets_message=='开':
+                    data = Devices(location=1, status=1, name='设备一')
+                    data.save()
+                if sockets_message=='空':
+                    data = Devices(location=1, status=2, name='设备一')
+                    data.save()
+            except:
+                print('数据库写入-设备对象 失败')
+            else:
+                print('数据库写入-设备对象 成功')
+    # 复制 设备二
+    # 复制 设备三
+    return(1)
+
+def frontend(request):
+    message = {}
+    try:
+        data = Devices.objects.all().order_by('date')       #从本地数据库获取天气数据
+    except:
+        print('Warning: READ DEVICES Data FAILED!')
+        return 1
+    else:
+        print('Congratulation: Read DEVICES Data Successfully!')
+        try:
+            data_json = serializers.serialize('json', data)
+            request.websocket.send(data_json) #发送消息到客户端
+        except:
+            print('Warning: Websocket FAILED!')
+
+def graphic(request):
+    return(1)
+
 
 
 

@@ -22,4 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/', views.index),
     url(r'^get_weather_json/', views.get_weather),
+    url(r'^frontend/', views.frontend),
+    url(r'^sockets/', views.sockets),
+    url(r'^graphic/', views.graphic),
 ]
