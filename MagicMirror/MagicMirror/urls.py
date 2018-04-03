@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^frontend/', views.frontend),
     url(r'^sockets/', views.sockets),
     url(r'^graphic/', views.graphic),
+    url(r'^testwebpage/', views.testwebpage),
+    url(r'^websockettest/', views.websockettest),
 ]

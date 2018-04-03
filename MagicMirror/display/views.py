@@ -89,20 +89,60 @@ def sockets(request):   #将排插数据写入数据库
     # 复制 设备三
     return(1)
 
+
+def DecodedCharArrayFromByteStreamIn(stringStreamIn):
+    #turn string values into opererable numeric byte values
+    byteArray = [ord(character) for character in stringStreamIn]
+    datalength = byteArray[1] & 127
+    indexFirstMask = 2 
+    if datalength == 126:
+        indexFirstMask = 4
+    elif datalength == 127:
+        indexFirstMask = 10
+    masks = [m for m in byteArray[indexFirstMask : indexFirstMask+4]]
+    indexFirstDataByte = indexFirstMask + 4
+    decodedChars = []
+    i = indexFirstDataByte
+    j = 0
+    while i < len(byteArray):
+        decodedChars.append( chr(byteArray[i] ^ masks[j % 4]) )
+        i += 1
+        j += 1
+    return decodedChars
+
+@require_websocket
 def frontend(request):
-    message = {}
-    try:
-        data = Devices.objects.all().order_by('date')       #从本地数据库获取天气数据
-    except:
-        print('Warning: READ DEVICES Data FAILED!')
-        return 1
-    else:
-        print('Congratulation: Read DEVICES Data Successfully!')
+    if request.is_websocket:
+        #print("request is websocket")
         try:
-            data_json = serializers.serialize('json', data)
-            request.websocket.send(data_json) #发送消息到客户端
+            data = Devices.objects.all().order_by('location')
         except:
-            print('Warning: Websocket FAILED!')
+            print('Warning: READ DEVICES Data FAILED!')
+            return 1
+        else:
+            print('Congratulation: Read DEVICES Data Successfully!')
+            try:
+                data_json = serializers.serialize('json', data)
+                b_data_json = str.encode(data_json)
+                #print(data_json)
+                #request.websocket.send(data_json) #发送消息到客户端
+                #print(DecodedCharArrayFromByteStreamIn(data_json))
+                #request.websocket.send(DecodedCharArrayFromByteStreamIn(data_json))
+                request.websocket.send(b_data_json)
+            except:
+                print('Warning: Websocket FAILED!')
+    else:
+        return render(request,'index.html')
+
+@require_websocket
+def websockettest(request):
+    message = request.websocket.wait()
+    #message = "sdadadsadsadas"
+    print(message)
+    request.websocket.send(message)
+
+def testwebpage(request):
+    return render(request,'websockettest.html')
 
 def graphic(request):
     return(1)
