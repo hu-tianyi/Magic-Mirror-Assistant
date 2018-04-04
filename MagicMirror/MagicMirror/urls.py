@@ -19,12 +19,18 @@ from django.contrib import admin
 from display import views
 
 urlpatterns = [
+    #后台接口
     url(r'^admin/', admin.site.urls),
+    #通信接口
     url(r'^index/', views.index),
-    url(r'^get_weather_json/', views.get_weather),
     url(r'^frontend/', views.frontend),
-    url(r'^sockets/', views.sockets),
-    url(r'^graphic/', views.graphic),
-    url(r'^testwebpage/', views.testwebpage),
-    url(r'^websockettest/', views.websockettest),
+    url(r'^sockets/', views.device_socket),
+    url(r'^voice/', views.voice_socket),
+    #空闲接口
+    url(r'^get_weather_json/', views.get_weather),
+    #url(r'^graphic/', views.graphic),
+    #测试接口
+    url(r'^testwebpage/', views.testwebpage),   #websocket测试页面
+    url(r'^websockettest/', views.websockettest),   #websocket测试端口
+    url(r'^sim_websocket/', views.sim_websocket),   #websocket-python模拟测试端口
 ]
