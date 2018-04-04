@@ -6,7 +6,7 @@ import json
 
 class Devices(models.Model):
     location = models.IntegerField(default = 1, null = False)
-    status = models.IntegerField(default = 2, null = False)     # 0==关、1==开、2==空
+    status = models.CharField(default = '???', max_length = 10, null = False)     # 0==关、1==开、2==空
     name = models.CharField(default = '请设置设备名<10字', max_length = 10, null = False)
     datetime = models.DateTimeField(auto_now_add = True)
 

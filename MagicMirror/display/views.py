@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from display.models import Devices, Tips, Weathers, News
 from django.core import serializers
-from dwebsocket import require_websocket
+from dwebsocket.decorators import accept_websocket,require_websocket
 import json, urllib.request
+import time
+import datetime
 
 # Create your views here.
 
@@ -110,36 +112,47 @@ def DecodedCharArrayFromByteStreamIn(stringStreamIn):
         j += 1
     return decodedChars
 
-@require_websocket
+@accept_websocket
 def frontend(request):
-    if request.is_websocket:
-        #print("request is websocket")
-        try:
-            data = Devices.objects.all().order_by('location')
+    if not request.is_websocket():#判断是不是websocket连接
+        try:    #如果是普通的http方法
+            #message = request.GET['message']
+            message = str.encode("http"+datetime.datetime.now)
+            return HttpResponse(message)
         except:
-            print('Warning: READ DEVICES Data FAILED!')
-            return 1
-        else:
-            print('Congratulation: Read DEVICES Data Successfully!')
+            return render(request,'index.html')
+    if request.is_websocket():
+        #print("request is websocket")
+        while True:
             try:
-                data_json = serializers.serialize('json', data)
-                b_data_json = str.encode(data_json)
-                #print(data_json)
-                #request.websocket.send(data_json) #发送消息到客户端
-                #print(DecodedCharArrayFromByteStreamIn(data_json))
-                #request.websocket.send(DecodedCharArrayFromByteStreamIn(data_json))
-                request.websocket.send(b_data_json)
+                data = Devices.objects.all().order_by('location')
             except:
-                print('Warning: Websocket FAILED!')
-    else:
-        return render(request,'index.html')
+                print('Warning: READ DEVICES Data FAILED!')
+                return 1
+            else:
+                #print('Congratulation: Read DEVICES Data Successfully!')
+                try:
+                    data_json = serializers.serialize('json', data)
+                    b_data_json = str.encode(data_json) #转成字节
+                    request.websocket.send(b_data_json)
+                except:
+                    print('Warning: Websocket FAILED!')
+            finally:
+                time.sleep(1)
 
-@require_websocket
+@accept_websocket
 def websockettest(request):
-    message = request.websocket.wait()
-    #message = "sdadadsadsadas"
-    print(message)
-    request.websocket.send(message)
+    if not request.is_websocket():#判断是不是websocket连接
+        try:#如果是普通的http方法
+            message = request.GET['message']
+            #message = str.encode("http"+datetime.datetime.now)
+            return HttpResponse(message)
+        except:
+            return render(request,'index.html')
+    else:
+        for message in request.websocket:
+            #message = str.encode("sdfasdfsafa")
+            request.websocket.send(message)#发送消息到客户端
 
 def testwebpage(request):
     return render(request,'websockettest.html')

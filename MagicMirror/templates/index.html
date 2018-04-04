@@ -364,41 +364,39 @@
     </div>
     <script type="text/javascript">
       $(function device_socket() {
+        if (window.s) {
+          window.s.close()
+        }
+        /*创建socket连接*/
         var socket = new WebSocket("ws://" + '0.0.0.0:8000' + "/frontend/");
-        //socket.onopen = function () {
-        //  console.log('WebSocket open');//成功连接上Websocket
-        //  socket.send($('#message').val());//发送数据到服务端
-        //};
-        socket.onmessage = function getdata(e) {
-          //console.log('message: ' + e.data);//打印服务端返回的数据
-          //console.log('e.data[0]: ' + e.data[0])
-          var obj = JSON.parse(e.data); 
-          //alert(typeof(obj));
-          //console.log(obj);
-          //alert(obj[1].fields.name)
-          //$('#device1').prepend('<p>' + e.data + '</p>');
-          for(var i=0;i<3;i++){
-            var device = obj[i];
-            //alert(device.fields.name);
-            //alert(typeof(device.fields.location));
-            if(device.fields.location==1){
-              var d = document.getElementById('device1'); //获取div节点对象
-              d.innerHTML = ('<br>'+"Name:"+device.fields.name+'<br>'+"Status:"+device.fields.status);
-              d.style.fontSize = "25px"
-            };
-            if(device.fields.location==2){
-              var d = document.getElementById('device2'); //获取div节点对象
-              d.innerHTML = ('<br>'+"Name:"+device.fields.name+'<br>'+"Status:"+device.fields.status);
-              d.style.fontSize = "25px"
-            };
-            if(device.fields.location==3){
-              var d = document.getElementById('device3'); //获取div节点对象
-              d.innerHTML = ('<br>'+"Name:"+device.fields.name+'<br>'+"Status:"+device.fields.status);
-              d.style.fontSize = "25px"
+        socket.onopen = function () {
+          console.log('WebSocket open');//成功连接上Websocket
+        };
+        $(function get_data(){
+          /*socket.send("1");*/
+          socket.onmessage = function getdata(e){
+            var obj = JSON.parse(e.data);
+            for(var i=0;i<3;i++){
+              var device = obj[i];
+              if(device.fields.location==1){
+                var d = document.getElementById('device1'); //获取div节点对象
+                d.innerHTML = ('<br>'+"Name:"+device.fields.name+'<br>'+"Status:"+device.fields.status);
+                d.style.fontSize = "30px"
+              };
+              if(device.fields.location==2){
+                var d = document.getElementById('device2'); //获取div节点对象
+                d.innerHTML = ('<br>'+"Name:"+device.fields.name+'<br>'+"Status:"+device.fields.status);
+                d.style.fontSize = "30px"
+              };
+              if(device.fields.location==3){
+                var d = document.getElementById('device3'); //获取div节点对象
+                d.innerHTML = ('<br>'+"Name:"+device.fields.name+'<br>'+"Status:"+device.fields.status);
+                d.style.fontSize = "30px"
+              };
             };
           };
-        };   
-        setInterval(device_socket,5000);
+          setInterval(get_data,500);
+        });
       });
     </script>
   </div>
