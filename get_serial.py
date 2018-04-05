@@ -29,7 +29,7 @@ while(True):
             ws.send("2on")
         if judge==b'0x22':
             ws.send("2off")
-    except:
-        print("读取串口失败")
+    except Exception as e:
+        print(e)
 ws.close()
 
