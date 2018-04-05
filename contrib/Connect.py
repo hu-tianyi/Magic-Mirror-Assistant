@@ -1,23 +1,26 @@
 # -*- coding: utf-8-*-
 import picamera
-import numpy as np
+#import numpy as np
 import sys
 import os
 import face_rec
 import logging
 import serial   #import 串口通信模块
-
+\
 reload(sys)
 sys.setdefaultencoding('utf8')
 
 WORDS = ["chazuo"]
 SLUG = "chazuo"
 
-'''
 def face_recog():
     name_0 = "Unknown"
     status = False
-    name, status = face_rec.recognition(True)
+    #print("aaaaaaaaaaaaaaaaaaaaaa")
+    try:
+        name, status = face_rec.recognition(True)
+    except Exception as e:
+        print(e)
     print(name)
     print(status)
     if (status==True and name != name_0):
@@ -27,7 +30,7 @@ def face_recog():
 '''
 def face_recog():
     return True
-
+'''
 def send_serial(mic, str_message):
     try:
         ser = serial.Serial("/dev/ttyAMA0",115200)
@@ -41,18 +44,19 @@ def send_serial(mic, str_message):
 def face2serial(mic, str_message):
     mic.say('人脸识别授权中', cache=True)
     try:
+        #result = face_recog()
         if (face_recog()):
-            mic.say('识别成功,执行操作', cache=True)
+            mic.say('第一识别成功,执行操作', cache=True)
             send_serial(mic, str_message)
         else:
-            mic.say('识别失败，重新识别中', cache=True)
+            mic.say('第一识别失败，重新识别中', cache=True)
             if (face_recog()):
-                mic.say('识别成功', cache=True)
+                mic.say('第二识别成功', cache=True)
                 send_serial(mic, str_message)
             else:
-                mic.say('识别失败，重新识别中', cache=True)
+                mic.say('第二识别失败，重新识别中', cache=True)
                 if (face_recog()):
-                    mic.say('识别成功', cache=True)
+                    mic.say('第三识别成功', cache=True)
                     send_serial(mic, str_message)
                 else:
                     mic.say('三次识别失败，请重新再试', cache=True)
