@@ -3,7 +3,7 @@ import serial
 import time
 from websocket import create_connection
 
-ws = create_connection("ws://0.0.0.0:8000/sockets")
+ws = create_connection("ws://0.0.0.0:8000/sockets/")
 while(True):
     try:
         ser = serial.Serial('/dev/ttyS0',115200)
