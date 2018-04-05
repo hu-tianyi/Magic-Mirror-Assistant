@@ -147,63 +147,63 @@ def device_socket(request):
     if request.is_websocket():
         for message in request.websocket:
             message_str = str(message, encoding="utf-8")
-            if message_str == "10":
+            if message_str == "1emp":
                 try:
                     device = Devices.objects.get(location=1)
                     device.status="无设备"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "11":
+            if message_str == "1on":
                 try:
                     device = Devices.objects.get(location=1)
                     device.status="开"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "12":
+            if message_str == "1off":
                 try:
                     device = Devices.objects.get(location=1)
                     device.status="关"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "20":
+            if message_str == "2emp":
                 try:
                     device = Devices.objects.get(location=2)
                     device.status="无设备"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "21":
+            if message_str == "2on":
                 try:
                     device = Devices.objects.get(location=2)
                     device.status="开"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "22":
+            if message_str == "2off":
                 try:
                     device = Devices.objects.get(location=2)
                     device.status="关"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "30":
+            if message_str == "3emp":
                 try:
                     device = Devices.objects.get(location=3)
                     device.status="无设备"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "31":
+            if message_str == "3on":
                 try:
                     device = Devices.objects.get(location=3)
                     device.status="开"
                     device.save()
                 except:
                     print("更新排插数据失败！")
-            if message_str == "32":
+            if message_str == "3off":
                 try:
                     device = Devices.objects.get(location=3)
                     device.status="关"
