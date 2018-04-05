@@ -8,7 +8,7 @@ while(True):
     try:
         time.sleep(0.1)
         ser = serial.Serial('/dev/ttyAMA0',115200)
-        judge = ser.read()
+        judge = ser.read(4)
         print(judge)
         #一号设备
         if judge==b'0x10':
