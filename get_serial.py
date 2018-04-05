@@ -6,7 +6,7 @@ from websocket import create_connection
 ws = create_connection("ws://0.0.0.0:8000/sockets/")
 while(True):
     try:
-        ser = serial.Serial('/dev/ttyS0',115200)
+        ser = serial.Serial('/dev/ttyAMA0',115200)
         judge = ser.read()
         #一号设备
         if judge==b'0x10':
