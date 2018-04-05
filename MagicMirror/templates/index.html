@@ -373,7 +373,7 @@
           console.log('WebSocket open');//成功连接上Websocket
         };
         $(function get_data(){
-          /*socket.send("1");*/
+          //socket.send("1");
           socket.onmessage = function getdata(e){
             var obj = JSON.parse(e.data);
             for(var i=0;i<3;i++){
@@ -395,7 +395,7 @@
               };
             };
           };
-          setInterval(get_data,500);
+          //setInterval(get_data,500);
         });
       });
     </script>
