@@ -6,7 +6,7 @@ import os
 import face_rec
 import logging
 import serial   #import 串口通信模块
-\
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
