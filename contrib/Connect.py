@@ -70,28 +70,28 @@ def handle(text, mic, profile, wxbot=None):
             if any(word in text for word in [u"一号", u"1号"]):
                 #发送一号打开命令
                 print('发送一号打开命令')
-                face2serial(mic, "0x11")
+                face2serial(mic, "0x11\r\n")
             if any(word in text for word in [u"二号", u"2号"]):
                 #发送二号打开命令
                 print('发送二号打开命令')
-                face2serial(mic, "0x21")
+                face2serial(mic, "0x21\r\n")
             if any(word in text for word in [u"三号", u"3号"]):
                 #发送三号打开命令
                 print('发送三号打开命令')
-                face2serial(mic, "0x31")
+                face2serial(mic, "0x31\r\n")
         elif any(word in text for word in [u"关闭", u"关机"]):
             if any(word in text for word in [u"一号", u"1号"]):
                 #发送一号关闭命令
                 print('发送一号关闭命令')
-                face2serial(mic, "0x12")
+                face2serial(mic, "0x12\r\n")
             if any(word in text for word in [u"二号", u"2号"]):
                 #发送二号关闭命令
                 print('发送二号关闭命令')
-                face2serial(mic, "0x22")
+                face2serial(mic, "0x22\r\n")
             if any(word in text for word in [u"三号", u"3号"]):
                 #发送三号关闭命令
                 print('发送三号关闭命令')
-                face2serial(mic, "0x32")
+                face2serial(mic, "0x32\r\n")
     except Exception, e:
         logger.error(e)
         mic.say('抱歉，物联网控制插件出错', cache=True)
