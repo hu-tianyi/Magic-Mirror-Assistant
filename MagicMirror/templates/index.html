@@ -53,11 +53,12 @@
     
     .lower-third {
       position: absolute;
-      top: 66.666%;
+      top: 76.666%;
       height: 200px;
       margin-top: -100px;
       line-height: 100px;
     }
+    
     
     .center-hor {
       position: absolute;
@@ -66,6 +67,12 @@
       text-align: center;
     }
     
+    .center-tips {
+      position:relative;
+      left:50%;
+      margin-left:0px; 
+      text-align: center;
+    }
     
     .center-ver-temp
     {
@@ -217,82 +224,7 @@
         display: inline-block;
         text-align: right;
     }
-    
-    
-    @font-face {
-        font-family: 'MFYueHeiNoncommercial-ExLight';
-        src: url('font/MFYueHeiNoncommercial-ExLight.eot'); /* IE9 Compat Modes */
-        src: url('font/MFYueHeiNoncommercial-ExLight.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-              url('font/MFYueHeiNoncommercial-ExLight.woff') format('woff'), /* Modern Browsers */
-              url('font/MFYueHeiNoncommercial-ExLight.ttf') format('truetype'), /* Safari, Android, iOS */
-              url('font/MFYueHeiNoncommercial-ExLight.svg#MFYueHei_Noncommercial-ExLight') format('svg'); /* Legacy iOS */
-        font-style: normal;
-        font-weight: normal;
-        text-rendering: optimizeLegibility;
-    }
-    
-    @font-face {
-        font-family: 'MFYueHeiNoncommercial-UltLight';
-        src: url('font/MFYueHeiNoncommercial-UltLight.eot'); /* IE9 Compat Modes */
-        src: url('font/MFYueHeiNoncommercial-UltLight.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-              url('font/MFYueHeiNoncommercial-UltLight.woff') format('woff'), /* Modern Browsers */
-              url('font/MFYueHeiNoncommercial-UltLight.ttf') format('truetype'), /* Safari, Android, iOS */
-              url('font/MFYueHeiNoncommercial-UltLight.svg#MFYueHei_Noncommercial-UltLight') format('svg'); /* Legacy iOS */
-        font-style: normal;
-        font-weight: normal;
-        text-rendering: optimizeLegibility;
-    }
-    
-    @font-face {
-        font-family: 'MFYueHeiNoncommercial-Light';
-        src: url('font/MFYueHeiNoncommercial-Light.eot'); /* IE9 Compat Modes */
-        src: url('font/MFYueHeiNoncommercial-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-              url('font/MFYueHeiNoncommercial-Light.woff') format('woff'), /* Modern Browsers */
-              url('font/MFYueHeiNoncommercial-Light.ttf') format('truetype'), /* Safari, Android, iOS */
-              url('font/MFYueHeiNoncommercial-Light.svg#MFYueHei_Noncommercial-Light') format('svg'); /* Legacy iOS */
-        font-style: normal;
-        font-weight: normal;
-        text-rendering: optimizeLegibility;
-    }
-    
-    @font-face {
-      font-family: 'HelveticaNeue-UltraLight';
-      src: url('font/HelveticaNeue-UltraLight.eot');
-      /* IE9 Compat Modes */
-      src: url('font/HelveticaNeue-UltraLight.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-      url('font/HelveticaNeue-UltraLight.woff') format('woff'), /* Modern Browsers */
-      url('font/HelveticaNeue-UltraLight.ttf') format('truetype'), /* Safari, Android, iOS */
-      url('font/HelveticaNeue-UltraLight.svg#9453ea8da727d260bcdbfa605bdbb5d2') format('svg');
-      /* Legacy iOS */
-      font-style: normal;
-      font-weight: 100;
-    }
-    
-    @font-face {
-      font-family: 'HelveticaNeue-Medium';
-      src: url('font/HelveticaNeue-Medium.eot');
-      /* IE9 Compat Modes */
-      src: url('font/HelveticaNeue-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-      url('font/HelveticaNeue-Medium.woff') format('woff'), /* Modern Browsers */
-      url('font/HelveticaNeue-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
-      url('font/HelveticaNeue-Medium.svg#d7af0fd9278f330eed98b60dddea7bd6') format('svg');
-      /* Legacy iOS */
-      font-style: normal;
-      font-weight: 400;
-    }
-    
-    @font-face {
-      font-family: 'HelveticaNeue-Light';
-      src: url('font/HelveticaNeue-Light.eot');
-      /* IE9 Compat Modes */
-      src: url('font/HelveticaNeue-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-      url('font/HelveticaNeue-Light.woff') format('woff'), /* Modern Browsers */
-      url('font/HelveticaNeue-Light.ttf') format('truetype'), /* Safari, Android, iOS */
-      url('font/HelveticaNeue-Light.svg#7384ecabcada72f0e077cd45d8e1c705') format('svg');
-      /* Legacy iOS */
-      font-style: normal;
-      font-weight: 200;
-    }
+
   </style> 
 </head>
 
@@ -345,7 +277,11 @@
     </div>
 
     <div class="lower-third center-hor">
-      <p>滚动消息放这里</p>
+      <marquee behavior="scroll" direction="up" scrolldelay="300" height="60px" width="600px">
+        <a>请说出“嘿叮当”唤醒精灵噢～</a><br>
+        <a>唤醒“滴”一声后再发出命令哦～</a><br>
+        <a>试一下“打开一号插座”吧～</a><br>
+      </marquee>
     </div>
     
     <div class="bottom left">
