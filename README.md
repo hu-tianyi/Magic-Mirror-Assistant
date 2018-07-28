@@ -1,4 +1,4 @@
-## #魔镜精灵助手（交互界面）Magic Mirror  Assistant
+# 魔镜精灵助手 Magic Mirror  Assistant
 
 ## 项目历程 Project Record
 
@@ -74,19 +74,19 @@ sudo apt-get install python3-yaml
 
 ## 已经实现 Done
 
-- [x] 构思数据库结构	20th, Mar
-	 [x] 搭建后台	21th, Mar
-	 [x] 搭建前端时间模块	21th, Mar
-	 [x] 天气api接口调用	23th, Mar
-	 [x] 搭建前端天气模块	24th, Mar
-	 [x] 交互界面大致布局	25th, Mar
-	 [x] 语音交互系统	27th, Mar
-- [x] 搭建前端设备状态模块 28th, Mar
-- [x] 协调与单片机的通信协议 3rd, April
-- [x] 前后端websocket通信  4th, April
-- [x] python 模拟websocket通信 
-- [x] 调用api接口
-- [x] 部署开发服务器
-- [x] 与单片机联调
-- [x] 前端UI美化
+- 构思数据库结构 20th, Mar
+- 搭建后台 21th, Mar
+- 搭建前端时间模块 21th, Mar
+- 天气api接口调用 23th, Mar
+- 搭建前端天气模块 24th, Mar
+- 交互界面大致布局 25th, Mar
+- 语音交互系统 27th, Mar
+- 搭建前端设备状态模块 28th, Mar
+- 协调与单片机的通信协议 3rd, April
+- 前后端websocket通信 4th, April
+- python 模拟websocket通信 
+- 调用api接口
+- 部署开发服务器
+- 与单片机联调
+- 前端UI美化
 
