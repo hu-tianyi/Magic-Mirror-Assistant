@@ -6,16 +6,6 @@ import os
 import face_rec
 import logging
 import serial   #import 串口通信模块
-import paho.mqtt.publish as publish #mqtt协议-publish
-
-# mqtt 客户端配置
-TOPIC = "/pi2mcu/"
-HOST = "m13.cloudmqtt.com"
-AUTH = {
-    'username':"pi",
-    'password':"pi"
-}
-PORT = 10045
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -41,26 +31,6 @@ def face_recog():
 def face_recog():
     return True
 '''
-
-def mqtt_publish(mic, message):
-    try:
-        publish.single(
-            TOPIC,
-            payload=message, 
-            hostname = HOST, 
-            auth = AUTH,
-            # qos = 0,
-            # tls=tls,
-            port = PORT,
-            #protocol=mqtt.MQTTv311
-        )
-    except:
-        print("mqtt publish fail")
-        mic.say('控制信息发送失败', cache=True)
-    else:
-        print("mqtt publish success")
-        mic.say('控制信息发送成功', cache=True)
-
 def send_serial(mic, str_message):
     try:
         ser = serial.Serial("/dev/ttyAMA0",115200)
@@ -71,23 +41,23 @@ def send_serial(mic, str_message):
     except:
         mic.say('串口控制模块故障', cache=True)
 
-def face2mqtt(mic, str_message):
+def face2serial(mic, str_message):
     mic.say('人脸识别授权中', cache=True)
     try:
         #result = face_recog()
         if (face_recog()):
             mic.say('第一识别成功,执行操作', cache=True)
-            mqtt_publish(mic, str_message)
+            send_serial(mic, str_message)
         else:
             mic.say('第一识别失败，重新识别中', cache=True)
             if (face_recog()):
                 mic.say('第二识别成功', cache=True)
-                mqtt_publish(mic, str_message)
+                send_serial(mic, str_message)
             else:
                 mic.say('第二识别失败，重新识别中', cache=True)
                 if (face_recog()):
                     mic.say('第三识别成功', cache=True)
-                    mqtt_publish(mic, str_message)
+                    send_serial(mic, str_message)
                 else:
                     mic.say('三次识别失败，请重新再试', cache=True)
     except:
@@ -100,28 +70,28 @@ def handle(text, mic, profile, wxbot=None):
             if any(word in text for word in [u"一号", u"1号"]):
                 #发送一号打开命令
                 print('发送一号打开命令')
-                face2mqtt(mic, "nodemcu1on")
+                face2serial(mic, "0x11\r\n")
             if any(word in text for word in [u"二号", u"2号"]):
                 #发送二号打开命令
                 print('发送二号打开命令')
-                face2mqtt(mic, "nodemcu2on")
+                face2serial(mic, "0x21\r\n")
             if any(word in text for word in [u"三号", u"3号"]):
                 #发送三号打开命令
                 print('发送三号打开命令')
-                face2mqtt(mic, "nodemcu3on")
+                face2serial(mic, "0x31\r\n")
         elif any(word in text for word in [u"关闭", u"关机"]):
             if any(word in text for word in [u"一号", u"1号"]):
                 #发送一号关闭命令
                 print('发送一号关闭命令')
-                face2mqtt(mic, "nodemcu1off")
+                face2serial(mic, "0x12\r\n")
             if any(word in text for word in [u"二号", u"2号"]):
                 #发送二号关闭命令
                 print('发送二号关闭命令')
-                face2mqtt(mic, "nodemcu2off")
+                face2serial(mic, "0x22\r\n")
             if any(word in text for word in [u"三号", u"3号"]):
                 #发送三号关闭命令
                 print('发送三号关闭命令')
-                face2mqtt(mic, "nodemcu3off")
+                face2serial(mic, "0x32\r\n")
     except Exception, e:
         logger.error(e)
         mic.say('抱歉，物联网控制插件出错', cache=True)
