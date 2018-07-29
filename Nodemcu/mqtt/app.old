@@ -1,0 +1,57 @@
+local module = {}
+mqtt = nil
+
+local function send_message(message)
+    -- Sends a simple ping to the broker
+    mqtt:publish("node2mcu", message, 0, 0 , function(client) 
+        print("node2mcu succeed")
+    end)
+end
+
+local function consume_data(payload)
+    --do something with the payload and send responce
+    --match
+    if string.find(payload, config.USERNAME) ~= nil then
+        --do something if payload contain device name
+        if string.find(payload, "on") ~= nil then
+            gpio.mode(config.DEVICE,gpio.OUTPUT)
+            gpio.write(config.DEVICE,gpio.HIGH)
+            send_message(config.USERNAME .. on)
+        end
+        if string.find(payload, "off") ~= nil then
+            gpio.mode(config.DEVICE,gpio.OUTPUT)
+            gpio.write(config.DEVICE, gpio.LOW)
+        end
+    end
+end
+
+local function register_myself()
+    -- Sends my id to the broker for registration
+    mqtt:subscribe("mcu2node",0,function(client)
+        -- subscribe topic mcu2node
+        print("Successfully subscribed to data endpoint")
+        send_ping()
+    end)
+end
+
+local function mqtt_start()
+    -- initiate the mqtt client and set keepalive timer to 120sec
+    mqtt = mqtt.Client(config.ID, 120, config.USERNAME, config.PASSWORD)
+    --register message callback beforehand
+    mqtt:on("message", function(client, topic, data)
+        if data ~= nil then
+            print(topic .. ": " .. data)
+            consume_data(data)
+        end
+    end)
+    -- Connect to broker
+    mqtt:connect(config.HOST, config.PORT, 0, 1, function(client)
+        register_myself()
+    end)
+end
+
+function module.start()
+  mqtt_start()
+end
+
+return module
