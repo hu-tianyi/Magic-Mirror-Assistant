@@ -5,7 +5,7 @@ import sys
 import os
 import face_rec
 import logging
-import serial   #import 串口通信模块
+#import serial   #import 串口通信模块   迭代后弃用
 import paho.mqtt.publish as publish #mqtt协议-publish
 
 # mqtt 客户端配置
@@ -61,6 +61,7 @@ def mqtt_publish(mic, message):
         print("mqtt publish success")
         mic.say('控制信息发送成功', cache=True)
 
+'''
 def send_serial(mic, str_message):
     try:
         ser = serial.Serial("/dev/ttyAMA0",115200)
@@ -70,23 +71,24 @@ def send_serial(mic, str_message):
         print("串口信息发送成功")
     except:
         mic.say('串口控制模块故障', cache=True)
+'''
 
 def face2mqtt(mic, str_message):
     mic.say('人脸识别授权中', cache=True)
     try:
         #result = face_recog()
         if (face_recog()):
-            mic.say('第一识别成功,执行操作', cache=True)
+            mic.say('识别成功,执行操作', cache=True)
             mqtt_publish(mic, str_message)
         else:
-            mic.say('第一识别失败，重新识别中', cache=True)
+            mic.say('识别失败，重新识别中', cache=True)
             if (face_recog()):
-                mic.say('第二识别成功', cache=True)
+                mic.say('识别成功', cache=True)
                 mqtt_publish(mic, str_message)
             else:
-                mic.say('第二识别失败，重新识别中', cache=True)
+                mic.say('识别失败，重新识别中', cache=True)
                 if (face_recog()):
-                    mic.say('第三识别成功', cache=True)
+                    mic.say('识别成功', cache=True)
                     mqtt_publish(mic, str_message)
                 else:
                     mic.say('三次识别失败，请重新再试', cache=True)
